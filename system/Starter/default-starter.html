@@ -1,0 +1,41 @@
+<!-- @requirement -->
+<!doctype html>
+<html>
+	<head>
+		<title>Requirement Checker</title>
+		<style>
+			@font-face{
+				src: url('--font');
+				font-family: 'Light';
+			}
+
+			@font-face{
+				src: url('--text');
+				font-family: 'Text';
+			}
+			body{display: flex; flex-direction: column; justify-content: center;
+			align-items: center; width: 100%; height: 100%; margin: 0; position: absolute;}
+			.big-text{font-family: 'Light'; font-size: 6em; color: #e42f1a;}
+			.table{margin-top: 40px; box-shadow: 0px 0px 0px rgba(0,0,0,0.1);
+			font-size: 16px; font-family: 'Text'; border: 1px solid #eee;}
+			.table th{text-align: left; border-bottom: 1px solid #eee;
+			padding: 10px; font-weight: normal; font-size: 16px;}
+			.table th:first-child{border-right: 1px solid #eee;}
+			.table td:first-child{border-right: 1px solid #eee;
+			color: #e42f1a;}
+			.table td{text-align: left; border-bottom: 1px solid #eee;
+			padding: 10px;}
+			.table tbody tr:last-child td{border-bottom:none !important; }
+		</style>
+	</head>
+	<body>
+		<section class="big-text">Requirement Failed</section>
+		<table class="table">
+			<tbody>
+				{table-data}
+			</tbody>
+		</table>
+	</body>
+</html>
+
+<!-- @endrequirement -->

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Moorexa Starter</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="keywords" content="moorexa starter, moorexa php framework, moorexa">
+
+	<link rel="stylesheet" type="text/css" href="<?=$assets->css('wrapper.css')?>">
+	<?=$assets->staticInclude(__DIR__.'/fonts.css')?>
+	<link rel="stylesheet" type="text/css" href="<?=$basePath?>/starter.css">
+</head>
+<body>
+	<?php
+
+	$assets->config([
+		'image_path' => $directory . '/images/'
+	]);
+
+	?>
+	<section class="starter-wrapper flex">
+
+		<section class="wrapper">
+			<div class="w1-end mor-starter">
+				<h1>Moorexa</h1>
+				<ul class="mor-starter-links">
+					<li><a href="">Documentation</a></li>
+					<li><a href="">Ticket</a></li>
+					<li><a href="">Installer</a></li>
+					<li><a href="">Community</a></li>
+					<li><a href="">Find Jobs</a></li>
+					<li><a href="">Market</a></li>
+				</ul>
+
+				<footer class="mor-footer">
+					<?=date('Y')?> &copy; Moorexa PHP Framework. Built by <a href="http://amadiify.com" target="_blank">Amadi Ifeanyi </a>
+				</footer>
+
+				<aside class="mor-starter-contact">
+					<a href="" target="_blank">
+						<img src="<?=$assets->image('paper-plane.png')?>">
+					</a>
+				</aside>
+			</div>
+		</section>
+
+
+			<!-- modal -->
+			<div class="modal-wrapper">
+				<div class="modal">
+					<div class="modal-header wrapper">
+						<h2 class="w1-15 modal-title"></h2>
+						<span class="w15-end">
+							<img src="<?=$assets->image('error3.png')?>" class="modal-close">
+						</span>
+					</div>
+
+					<div class="modal-body">
+						<ul class="documentation">
+							<li>
+								<a href="">
+									<div class="wrapper">
+										<img src="<?=$assets->image('folder-15.png')?>" class="w1-4">
+										<p class="w4-18">Offline Documentation</p>
+									</div>
+								</a>
+							</li>
+
+							<li>
+								<a href="">
+									<div class="wrapper">
+										<img src="<?=$assets->image('folder-16.png')?>" class="w1-4">
+										<p class="w4-18">Online Documentation</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+
+						<ul class="ticket">
+							<li>
+								<a href="">
+									<div class="wrapper">
+										<img src="<?=$assets->image('battery-9.png')?>" class="w1-4">
+										<p class="w4-18">Report a Bug</p>
+									</div>
+								</a>
+							</li>
+
+							<li>
+								<a href="">
+									<div class="wrapper">
+										<img src="<?=$assets->image('fingerprint.png')?>" class="w1-4">
+										<p class="w4-18">Contribute/Support</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+
+						<ul class="installer">
+
+							<li>
+								<a href="">
+									<div class="wrapper">
+										<img src="<?=$assets->image('compose.png')?>" class="w1-4">
+										<p class="w4-18">Install Moorexa Manager</p>
+									</div>
+								</a>
+							</li>
+
+							<li>
+								<a href="">
+									<div class="wrapper">
+										<img src="<?=$assets->image('windows-4.png')?>" class="w1-4">
+										<p class="w4-18">Import Thirdparty Apps</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+
+						<ul class="community">
+							<li>
+								<a href="">
+									<div class="wrapper">
+										<img src="<?=$assets->image('eyeglasses.png')?>" class="w1-4">
+										<p class="w4-18">Moorexa Forum</p>
+									</div>
+								</a>
+							</li>
+
+							<li>
+								<a href="">
+									<div class="wrapper">
+										<img src="<?=$assets->image('stack-overflow.png')?>" class="w1-4">
+										<p class="w4-18">Stack Overflow</p>
+									</div>
+								</a>
+							</li>
+
+							<li>
+								<a href="">
+									<div class="wrapper">
+										<img src="<?=$assets->image('idea.png')?>" class="w1-4">
+										<p class="w4-18">Event, Hubs, Freelancers</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+	</section>
+
+
+<script type="text/javascript" src="<?=$assets->js('moorexa.js')?>"></script>
+<script type="text/javascript" src="<?=$basePath?>/starter.js"></script>
+</body>
+</html>

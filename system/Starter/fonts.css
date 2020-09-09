@@ -1,0 +1,9 @@
+@font-face{
+	src: url('<?=func()->urlClass()->getPathUrl() . "/" . func()->const("assets")?>/fonts/HelveticaNeueUltraLight.ttf');
+	font-family: 'Light';
+}
+
+@font-face{
+	src: url('<?=func()->urlClass()->getPathUrl() . "/" . func()->const("assets")?>/fonts/Poppins-Regular.ttf');
+	font-family: 'Text';
+}

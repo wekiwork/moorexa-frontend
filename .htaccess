@@ -1,0 +1,68 @@
+# @package .htaccess for Moorexa PHP Framework
+# @dist : Beautiful URL, Static Caching, File exclusion from HTTP
+# @installation >
+
+#  1. VPS Ubuntu : 
+#     1.1 enabled mod_rewrite with this command "sudo a2enmod rewrite"
+#     1.2 Make file for your httpd configuration in /etc/apache2/sites-available/ 
+#       1.2.1  Run "sudo nano /etc/apache2/sites-available/allow-Htaccess.conf"
+#       1.2.2  Paste the code below
+#               DocumentRoot /var/www
+#               <Directory /var/www/>
+#                 Options Indexes FollowSymLinks
+#                  AllowOverride All
+#                  Require all granted
+#               </Directory>
+#       1.2.3  Save Config with "Ctrl + S" and "Ctrl + X" to close nano editor.
+#     1.3 Activate configuration with "sudo a2ensite allow-Htaccess.conf"
+#     1.4 Restart apache2 to enable allow-Htaccess.conf configuration
+#       1.4.1 Run "sudo service apache2 restart" volla!
+
+#  2. Shared Hosting :
+#     2.1 Show all hidden files. You can find this option in your file manager. 
+#     2.2 Reload your webpage and you should be fine.
+#     2.3 If you see the .htaccess file in your root Directory, public_html/ 
+#         and still doesn't work possibly with a 500 Internal server error, please contact support@moorexa.com 
+
+# add rules if mod_rewrite module is avaliable
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+AddDefaultCharset utf-8
+DefaultLanguage en
+FileETag None
+
+<IfModule mod_spelling.c>
+	CheckSpelling On
+</IfModule>
+
+# it gets fast and safe here.
+<IfModule mod_headers.c>
+  <FilesMatch ".(js|css|xml|gz|html|php|mp4|m4v|ttf|otf|mp3|svg)$">
+    Header append Vary: Accept-Encoding
+  </FilesMatch>
+
+  <filesMatch ".(jpg|jpeg|png|gif|ico|mp4|m4v|mp3|svg)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </filesMatch>
+
+  <FilesMatch ".(js|css|ttf|otf)$">
+		Header set Cache-Control "no-cache, no-store, must-revalidate"
+		Header set Pragma "no-cache"
+		Header set Expires 0
+  </FilesMatch>
+
+  <FilesMatch "(assist|composer.json|composer.lock|composer|config.xml)">
+	  Deny from all
+  </FilesMatch>
+
+</IfModule>
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# it gets beautiful here. Please maintain __app_request. 
+RewriteRule ^(.+)$ index.php?__app_request__=$1 [QSA,L]
+
+</IfModule>

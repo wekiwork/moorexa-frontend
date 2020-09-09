@@ -1,0 +1,34 @@
+#!/usr/bin/env php
+<?php
+
+use Lightroom\{
+    Core\BootCoreEngine, Core\Payload, 
+    Core\PayloadRunner, Adapter\ClassManager
+};
+
+// require init file
+if (!defined('ASSIST_TOKEN')) require_once 'init.php';
+
+// create BootCoreEngine instance
+$engine = ClassManager::singleton(BootCoreEngine::class);
+
+// create Payload instance
+$payload = ClassManager::singleton(Payload::class);
+
+// display errors
+$engine->displayErrors(true);
+
+// register a default package manager
+$engine->defaultPackageManager($payload, $CLI_PACKAGER);
+
+// register default assist manager
+$payload->register('assist-manager', $payload->handler(Classes\Cli\Assist::class));
+
+// register aliase 
+BootCoreEngine::registerAliases([
+    Classes\Cli\Assist::class => SOURCE_BASE_PATH . '/utility/Classes/CLI/Assist.php',
+    Classes\Cli\CliInterface::class => SOURCE_BASE_PATH . '/utility/Classes/CLI/CliInterface.php'
+]);
+
+// boot application
+$engine->bootProgram($payload, ClassManager::singleton(PayloadRunner::class));

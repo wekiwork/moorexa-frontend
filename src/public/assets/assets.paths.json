@@ -1,0 +1,19 @@
+{
+    "moorexa.min.js": ".\/src\/public\/assets\/js\/\/Rexajs\/moorexa.min.js",
+    "axios.min.js": ".\/src\/public\/assets\/js\/axios.min.js",
+    "moorexa.css": ".\/src\/public\/assets\/css\/moorexa.css",
+    "wrapper.css": ".\/src\/public\/assets\/css\/wrapper.css",
+    "paper-plane.png": ".\/.\/system\/Starter\/\/images\/paper-plane.png",
+    "error3.png": ".\/.\/system\/Starter\/\/images\/error3.png",
+    "folder-15.png": ".\/.\/system\/Starter\/\/images\/folder-15.png",
+    "folder-16.png": ".\/.\/system\/Starter\/\/images\/folder-16.png",
+    "battery-9.png": ".\/.\/system\/Starter\/\/images\/battery-9.png",
+    "fingerprint.png": ".\/.\/system\/Starter\/\/images\/fingerprint.png",
+    "compose.png": ".\/.\/system\/Starter\/\/images\/compose.png",
+    "windows-4.png": ".\/.\/system\/Starter\/\/images\/windows-4.png",
+    "eyeglasses.png": ".\/.\/system\/Starter\/\/images\/eyeglasses.png",
+    "stack-overflow.png": ".\/.\/system\/Starter\/\/images\/stack-overflow.png",
+    "idea.png": ".\/.\/system\/Starter\/\/images\/idea.png",
+    "moorexa.js": ".\/src\/public\/assets\/js\/\/Rexajs\/moorexa.js",
+    "sys\/smiling2.png": ".\/src\/public\/assets\/images\/sys\/smiling2.png"
+}

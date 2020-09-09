@@ -1,0 +1,32 @@
+{
+    "name": "moorexa/framework",
+    "description": "Moorexa is a progressive web development framework designed to give you the best experience building with PHP.",
+    "keywords": ["php", "moorexa", "php framework", "moorexa framework", "moorexa php framework"],
+    "homepage": "http://moorexa.com",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amadi ifeanyi",
+            "email": "helloamadiify@gmail.com",
+            "homepage": "http://amadiify.com"
+        },
+        {
+            "name": "Fregate Lab",
+            "email": "support@fregatelab.com",
+            "homepage": "http://fregatelab.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*",
+        "ext-gd": "*",
+        "ext-openssl": "*",
+        "ext-simplexml": "*",
+        "ext-fileinfo": "*",
+        "ext-curl": "*",
+        "ext-zip": "*",
+        "symfony/yaml": "^4.4",
+        "monolog/monolog": "^1.25",
+        "filp/whoops": "^2.7"
+    }
+}

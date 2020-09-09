@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title><?=$title?></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="keywords" content="moorexa starter, moorexa php framework, moorexa">
+
+	<link rel="stylesheet" type="text/css" href="<?=$assets->css('wrapper.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?=$assets->css('error.css')?>">
+</head>
+<body>
+<div class=errorPage>
+    <aside data-type=go-back-top onclick="return history.back();" title="Go Back to Previous Page">
+        <span></span>
+        <span data-type=go-back-text><b>Back</b></span>
+    </aside>
+    <div align=center>
+        <h1><b><?=$errorCode?></b></h1>
+        <h1><?=$title?></h1>
+        <p><?=$message?></p>
+        <a href="<?=func()->urlClass()->getPathUrl()?>" data-type="go-back-btn" title="Homepage"></a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,377 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * @package GitTool
+ * This package can download and extract files and folder from your remote git repo,
+ * Can also push to the master branch.
+ * 
+ * @author Amadi ifeanyi <amadiify.com>
+ * 
+ * You can try it with:
+ * php git pull <user>/<repo>               (this would get the master branch)
+ * php git pull <user>/<repo> latest        (this would get the latest release)
+ * php git pull <user>/<repo> ^=7           (this would get version 7 and above release)
+ * php git pull <user>/<repo> ^7            (this would get above version 7 release)
+ * php git pull <user>/<repo> v1.7          (this would get the release for v1.7)
+ * php git pull <user>/<repo> 1.7           (this would get the release for 1.7)
+ * php git pull <user>/<repo> 1.7 /<dir>    (this would get the release for 1.7 and save to /<dir>)
+ */
+
+class GitTool
+{
+    // ansii codes
+    private $ansii = [
+        'reset' => "\033[0m",
+        'save'  =>  "\0337",
+        'green1' => "\033[32;1m",
+        'green' => "\033[32m",
+        'bold' => "\033[1m",
+        'clean' => "\033[K",
+        'return' => "\0338",
+        'red' => "\033[31m",
+        'red1' => "\033[31;1m",
+        'line' => "\033[4m",
+        'clear-screen' => "\033[2J",
+        'quit-bg' => "\033[37;41;1m",
+        'quit-color' => "\033[37m"
+    ];
+
+    // set default link
+    private static $defaultLink = null;
+
+    // save to location
+    private static $saveto;
+
+    // get ansii codes
+    public function ansii($code = 'reset')
+    {
+        if (strtolower(PHP_SHLIB_SUFFIX) == 'dll')
+        {
+            //window
+            return null;
+        }
+        else
+        {
+            return $this->ansii[$code];
+        }
+    }
+
+    // send output to screen
+    private static function out($text, $code = null)
+    {
+        $ass = new GitTool;
+
+        if ($code === null)
+        {
+            $code = $ass->ansii('reset');
+        }
+
+        fwrite(STDOUT, $code . $text . $ass->ansii() . PHP_EOL);
+    }
+
+    public static function __callStatic(string $method, array $args)
+    {
+        self::out('Invalid command '. $method);
+    }
+
+    // run cli command
+    public static function runCliCommand(string $command)
+    {
+        pclose(popen($command, "w"));
+    }
+
+    // show text and sleep for 100000 milleseconds.
+    protected static function sleep($text)
+    {
+        fwrite(STDOUT, $text . PHP_EOL);
+        usleep(100000);
+    }
+
+    private static function convertToReadableSize($size, &$sbase=null){
+        $base = log($size) / log(1024);
+        $suffix = array("Byte", "KB", "MB", "GB", "TB");
+        $f_base = floor($base);
+        $convert = round(pow(1024, $base - floor($base)), 1) . $suffix[$f_base];
+    
+        $sbase = strtolower($suffix[$f_base]);
+    
+        if ($convert > 0)
+        {
+            return $convert;
+        }
+    
+        return 0 . 'KB';
+    }
+
+    public static function pull($link=null, $version='-master', $saveto=__DIR__)
+    {
+        $link = $link == null ? self::$defaultLink : $link;
+        // get working directory
+        $workingDir = $_SERVER['PWD'];
+
+        self::$saveto = $workingDir . '/';
+
+        if (is_dir($version))
+        {
+            self::$saveto = $version;
+            $version = '-master';
+        }
+        else
+        {
+            if (strpos($version, '/') !== false)
+            {
+                self::$saveto = $version;
+                $version = '-master';
+            }
+        }
+
+        if (!is_dir(self::$saveto))
+        {
+            mkdir(self::$saveto);
+        }
+
+        if (is_string($link) && strlen($link) > 2)
+        {
+
+            // Set RIGHT privileges for current working dir dir:
+            self::runCliCommand('sudo chmod -R 775 '.self::$saveto . '/');
+
+            $checkReleases = false;
+            $extra = '';
+
+            if ($version != '-master' && $version != 'latest')
+            {
+                $checkReleases = true;
+            }
+            else
+            {
+                $extra = '/' . $version;
+            }
+
+            // get version
+            $endpoint = 'https://api.github.com/repos/'.$link.'/releases'. $extra;
+
+            $rand = mt_rand(1, 100);
+
+            $agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:'.$rand.'.0) Gecko/20100101 Firefox/'.$rand.'.0';
+
+
+            if ($version == '-master')
+            {
+                self::sleep('trying to connect...');
+                $endpoint = 'https://github.com/'.$link.'/archive/master.zip';
+
+                $ch = curl_init($endpoint);
+                curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+
+                $content = curl_exec($ch);
+                $err = curl_error($ch);
+                curl_close($ch);
+
+                $getError = trim($content);
+
+                if (strtolower($getError) == 'not found')
+                {
+                    self::out(strtolower($getError) . ' error returned from github server. Please check repo name or tag name used.');
+                }
+                else
+                {
+                    self::sleep(self::convertToReadableSize(strlen($content)). ' downloaded from @https://github.com/'.$link);
+
+                    self::sleep('saving file, starting extraction process next....');
+                
+                    $destination = $workingDir . '/gitRequestFile.zip';
+                    $fh = fopen($destination, 'wb');
+                    fwrite($fh, $content);
+                    fclose($fh);
+
+                    self::moveFiles($destination);
+                }
+            }
+            else
+            {
+
+                self::sleep('trying to connect...');
+
+                $ch = curl_init($endpoint);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+                $content = curl_exec($ch);
+                $err = curl_error($ch);
+                curl_close($ch);
+
+                self::sleep('getting response from repo @'.$link);
+
+                if ($err)
+                {
+                    self::out('error: '. $err);
+                }
+                else
+                {
+                    $json = json_decode($content);
+
+                    if ($checkReleases)
+                    {
+                        foreach ($json as $release)
+                        {
+                            if ($release->tag_name == $version)
+                            {
+                                break;
+                            }
+
+                            $tag = doubleval($release->tag_name);
+                            $equal = strpos($version, '=');
+
+                            // remove ^
+                            $version = preg_replace('/[^0-9.]/', '', $version);
+                            $version = doubleval($version);
+
+                            // check if $tag is greater than $version
+                            if ($tag > $version)
+                            {
+                                $version = $release->tag_name;
+                                break;
+                            }
+
+                            elseif ($equal !== false)
+                            {
+                                if ($tag >= $version)
+                                {
+                                    $version = $release->tag_name;
+                                    break;
+                                }
+                            }
+
+                            else
+                            {
+                                $version = null;
+                            }
+                        }   
+                    }
+
+                    $message = strtolower($json->message);
+                    $error = true;
+
+                    if ($version !== null)
+                    {
+                        if ($message == '')
+                        {
+                            // success
+                            $error = false;
+                            $endpoint = 'https://github.com/'.$link.'/archive/'.$version.'.zip';
+                            self::sleep('trying to fetch archive with @'.$endpoint);
+
+                            $ch = curl_init($endpoint);
+                            curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                            curl_setopt($ch, CURLOPT_USERAGENT, $agent);
+                            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                                'If-Modified-Since: Thu, 05 Jul 2012 15:31:30 GMT'
+                            ]);
+
+                            $content = curl_exec($ch);
+                            $err = curl_error($ch);
+                            curl_close($ch);
+
+                            self::sleep(self::convertToReadableSize(strlen($content)). ' downloaded from @https://github.com/'.$link);
+
+                            if ($err)
+                            {
+                                self::out('error: '. $err);
+                            }
+                            else
+                            {
+                                self::sleep('saving file, starting extraction process next....');
+                
+                                $destination = $workingDir . '/gitRequestFile.zip';
+                                $fh = fopen($destination, 'wb');
+                                fwrite($fh, $content);
+                                fclose($fh);
+
+                                self::moveFiles($destination);
+                            }
+
+                        }
+                    }
+
+                    if ($error)
+                    {
+                        self::out(strtolower($message) . ' error returned from github server. Please check repo name or tag name used.');
+                    }
+                }
+
+            }
+
+        }
+        else
+        {
+            self::out('Invalid remote url #'.$link);
+        }
+    }
+
+    private static function moveFiles(string $destination)
+    {
+        $workingDir = $_SERVER['PWD'];
+
+        $tmp = $workingDir . '/__tmp__/';
+
+        if (!is_dir($tmp))
+        {
+            mkdir($tmp);
+        }
+
+        $zip = new ZipArchive();
+        $zip->open($destination);
+        $zip->extractTo($tmp);
+        $zip->close();
+
+        $directory = glob($tmp . '*');
+        foreach ($directory as $dir)
+        {
+            if ($dir != '.' && $dir != '..')
+            {
+                if (is_dir($dir))
+                {
+                    $base = basename($dir);
+                    $dir = $workingDir . '/__tmp__/' . $base;
+
+                    // move into that directory
+                    self::runCliCommand('cd '.$dir);
+                    // show all files
+                    self::runCliCommand('shopt -s nullglob 2> /dev/null');
+                    $command = 'mv -f {'.$dir.'/*,'.$dir.'/.*} '.self::$saveto.'/ 2> /dev/null';
+                    self::sleep('extracting files....');
+                    // begin extraction
+                    self::runCliCommand($command);
+                    // alternative. just incase first command fails.
+                    self::runCliCommand('mv -f '.$dir.'/* '.self::$saveto.'/ 2> /dev/null');
+                    self::runCliCommand('mv -f '.$dir.'/.* '.self::$saveto.'/ 2> /dev/null');
+                    // for file update
+                    self::runCliCommand('cp -r '.$dir.'/* '.self::$saveto.'/ 2> /dev/null && rm -R '.$dir.'/* 2> /dev/null');
+                    self::sleep('all done..');
+                    // delete files
+                    unlink($destination);
+                    self::runCliCommand('rm -rf '.$tmp);
+                    break;
+                }
+            }
+        }
+    }
+}
+
+// gittool running on CLI?
+if (substr(php_sapi_name(), 0, 3) == 'cli')
+{
+    // call method
+    $argv = $_SERVER['argv'];
+    $copy = $argv;
+    $other = array_splice($argv, 2);
+    $method = $argv[1];
+
+    call_user_func_array([GitTool::class, $method], $other);
+}

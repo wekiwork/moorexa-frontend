@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>App is Coming Soon</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="keywords" content="moorexa starter, moorexa php framework, moorexa">
+
+	<link rel="stylesheet" type="text/css" href="<?=$assets->css('wrapper.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?=$assets->css('moorexa.css')?>">
+    
+    <style type="text/css">
+        body{background:#0a0b15;color:#fff;font-family:'Poppins';}
+        h1{font-size:7em;margin:0;font-family:'Helvetica'; margin-bottom: 20px;}
+        p{font-size:1.2em
+        }.wrapper{padding:50px;margin-top:150px
+        }*[data-animate]{transform:translateY(40px);opacity:0;transition:transform 1s ease-in-out,opacity 0.9s ease-in-out
+        }
+        form{display:block;width:100%;padding:15px;height:auto;background:#101323;border-radius:10px;box-shadow:0px 0px 10px rgba(0,0,0,0.02);margin-top:29px;transition:background 0.6s ease-in-out
+        }
+        form input{width:80%;height:60px;font-size:1.2em;color:#fff;background:transparent;border:1px solid rgba(0,0,0,0);border-radius:inherit;padding-left:20px
+        }
+        form input::placeholder{opacity:1;color:inherit
+        }
+        form button{color:#1a2036;font-size:1.2em;width:18%;height:100%;display:inline-block;border:none;border-radius:inherit;margin-left:1%;height:60px;background:rgba(255,255,255);box-sizing:border-box;transition:background 0.6s ease-in-out,color 0.6s ease-in-out,opacity 0.6s ease-in-out
+        }.white-color{background:rgba(255,255,255,1);}.invert-text-color{color:#0a0b15
+        }.alter-color{background:#0a0b15;color:#fff
+        }.alter-color:hover{opacity:0.8
+        }.footer{position:fixed;bottom:0;width:100%;text-align:center
+        }.footer h1{color:rgba(255,255,255,0.1);font-size:4em;text-transform:capitalize
+        }.shake{animation:shakeButton 1s ease-in-out 1;-webkit-animation:shakeButton 1s ease-in-out 1;-moz-animation:shakeButton 1s ease-in-out 1;-ms-animation:shakeButton 1s ease-in-out 1
+        }.alert-card2{background:#037093;color:#fff
+        }.alert-card2 p{font-size:1.3em
+        }.alert-card2 .card-header{font-size:20px
+        }.alert-card2 .card-button a{background:#fff;color:#037093
+        }.alert-card2 .card-button a:hover::after{background:#fff
+        }.alert-card2 .card-button{border-top:1px solid rgba(255,255,255,0.2)
+        }.alert-card2 .card-header{border-bottom:1px solid rgba(255,255,255,0.2)
+        }.alert-overlay2{background:rgba(255,255,255,0.02)
+        }
+        @media only screen and (max-width: 400px)
+        {
+            h1{font-size: 2.4em;}
+            p{margin-top: 15px;}
+        }
+    </style>
+</head>
+<body>
+    
+    <section class="wrapper" data-loadend="swapform()">
+        <h1 data-animate="up" class="w1-18">Coming Soon.</h1>
+        <p data-animate="up" class="w1-18">Please check back soon or submit your email address to get notified when we up and running.</p>
+        <form action="" method="post" id="postform" data-animate="up" class="w1-18 flex-wrapper">
+            <input type="text" name="email_address" placeholder="Your email address">
+            <button name="submitf" type="submit">Notify Me</button>
+        </form>
+    </section>
+    
+    
+<script type="text/javascript">
+    var email=document.querySelector('*[name="email_address"]');var subm=document.querySelector('*[name="submitf"]');function swapform(){var dataAnimate=document.querySelectorAll('*[data-animate]');email.addEventListener('focus',function(e){this.parentNode.style.background='#fff';this.classList.add('invert-text-color');this.nextElementSibling.classList.add('alter-color');});email.addEventListener('blur',function(e){this.parentNode.style.background='#0a0b15';this.classList.remove('invert-text-color');this.nextElementSibling.classList.remove('alter-color');});var postform=document.querySelector('#postform');Event(subm,'click',function(e){e.preventDefault();var val=email.value;if(postform.classList.length>0){postform.className="w1-18 flex-wrapper";};if(val.match(/([^@]+)+[@]+\w{1,}([.]+)+\w{1,}/)){postform.classList.remove('shake');postform.submit();}else{setTimeout(function(){postform.classList.add('shake');email.placeholder='Please enter a valid email address';},200);}});[].forEach.call(dataAnimate,function(ele,ind){var delay=ind>0?Number(ind+'000') : 200;setTimeout(function(){ele.style.transform='translateY(0px)';ele.style.opacity='1';setTimeout(function(){ele.removeAttribute('data-animate');if(ind==dataAnimate.length-1){}},1000);},delay);});}
+</script>
+<script type="text/javascript" src="<?=$assets->js('http.js')?>"></script>
+<script type="text/javascript" src="<?=$assets->js('moorexa.min.js')?>"></script>
+</body>
+</html>

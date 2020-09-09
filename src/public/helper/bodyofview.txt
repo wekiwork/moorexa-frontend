@@ -1,0 +1,9 @@
+
+<!-- @@__path -->
+
+<div class="new-moorexa-view">
+	<div class="new-moorexa-view-wrapper">
+		<img $src="sys/smiling2.png">
+		<h1 style="padding:20px; font-size:30px;">@@__cont/@@__view->render('@@__filename') generated a new view for you. This view template lives in @@__path</h1>
+	</div>
+</div>

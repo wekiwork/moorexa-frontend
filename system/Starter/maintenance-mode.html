@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>App is on Maintenance</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="keywords" content="moorexa starter, moorexa php framework, moorexa">
+
+	<link rel="stylesheet" type="text/css" href="<?=$assets->css('wrapper.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?=$assets->css('moorexa.css')?>">
+    
+    <style type="text/css">
+        body{background:#0a0b15 !important;color:#fff;font-family:'Poppins';}
+        h1{font-size:8em;margin:0;font-family:'Helvetica'; color:#fff;
+        text-transform: none;
+        line-height: 1.2em; margin-bottom: 20px;}
+        p{font-size:1.2em; color:#fff;
+        }.contact-form{width:50%;margin:0 auto;margin-top:25px;}.contact-form input,.contact-form textarea{width:100%;height:54px;color:#fff;background:transparent;border:2px solid rgba(255,255,255,0.25);margin-bottom:13px;border-radius:40px;padding-left:20px;font-size:1.8em;transition:background 0.6s ease-in-out,color 0.6s ease-in-out;}.contact-form input:hover,.contact-form textarea:hover,.contact-form input:focus,.contact-form textarea:focus{background:#fff;color:#0a0b15;}.contact-form textarea{padding-top:20px;height:100px;}.contact-form input::placeholder,.contact-form textarea::placeholder{color:inherit;opacity:1;}.header-top{margin-top:-40px
+        }.wrapper{padding:50px;margin-top:100px
+        }*[data-animate]{transform:translateY(40px);opacity:0;transition:transform 1s ease-in-out,opacity 0.9s ease-in-out
+        }.wrapper a,.wrapper button{color:#0a0b15;font-size:2em;width:18%;display:block;height:60px;background:rgba(255,255,255);box-sizing:border-box;box-shadow:0px 0px 10px rgba(3,112,147,0.5);transition:background 0.6s ease-in-out,color 0.6s ease-in-out,opacity 0.6s ease-in-out,transform 1s ease-in-out;border-radius:40px;padding:15px;text-align:center;margin-top:100px
+        }.wrapper a:hover,.wrapper button:hover{color:#0a0b15
+        }.white-color{background:rgba(255,255,255,1)
+        }.invert-text-color{color:#0a0b15
+        }.alter-color{background:#0a0b15;color:#fff
+        }.alter-color:hover{opacity:0.8
+        }.footer{position:fixed;bottom:0;width:100%;text-align:center
+        }.footer h1{color:rgba(255,255,255,0.1);font-size:4em;text-transform:capitalize
+        }.shake{animation:shakeButton 1s ease-in-out 1;-webkit-animation:shakeButton 1s ease-in-out 1;-moz-animation:shakeButton 1s ease-in-out 1;-ms-animation:shakeButton 1s ease-in-out 1
+        }.alert-card2{background:#0a0b15;color:#fff
+        }.alert-card2 p{font-size:1.3em
+        }.alert-card2 .card-header{font-size:20px
+        }.alert-card2 .card-button a{background:#fff;color:#0a0b15;}.alert-card2 .card-button a:hover::after{background:#fff
+        }.alert-card2 .card-button{border-top:1px solid rgba(255,255,255,0.2)
+        }.alert-card2 .card-header{border-bottom:1px solid rgba(255,255,255,0.2)
+        }.alert-overlay2{background:rgba(255,255,255,0.02)
+        }
+        
+        @media only screen and (max-width: 400px)
+        {
+            h1{font-size: 2.4em;}
+            p{margin-top: 15px;}
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="wrapper" data-loadend="swapform()" align="center">
+		<h1 data-animate="up" class="w2-18">We'll be right back!</h1>
+		<p data-animate="up" class="w2-18">We are currently running our periodic maintainance, please check back soon.</p>
+    </div>
+    
+<script type="text/javascript">
+    var email=document.querySelector('*[name="email_address"]');var subm=document.querySelector('*[name="submitf"]');function swapform(){var dataAnimate=document.querySelectorAll('*[data-animate]');[].forEach.call(dataAnimate,function(ele,ind){var delay=ind>0?Number(ind+'000') : 200;setTimeout(function(){ele.style.transform='translateY(0px)';ele.style.opacity='1';setTimeout(function(){ele.removeAttribute('data-animate');},1000);},delay);});if(subm!==null){var postform=document.querySelector('#postform');var subtext=document.querySelector('#sub-text');var cf=document.forms['contact-form'];Event(subm,'click',function(e){e.preventDefault();if(postform.classList.length>0){postform.classList.remove('shake');};if(cf.fname.value==""||cf.femail.value==""||cf.message.value==""){setTimeout(function(){postform.classList.add('shake');if(!subtext.hasAttribute('data-before')){subtext.setAttribute('data-before',subtext.innerText);}
+    subtext.innerText='Please All fields are required!';},200);}else{if(subtext.hasAttribute('data-before')){subtext.innerText=subtext.getAttribute('data-before');};postform.classList.remove('shake');postform.submit();}});}}
+</script>
+
+<script type="text/javascript" src="<?=$assets->js('http.js')?>"></script>
+<script type="text/javascript" src="<?=$assets->js('moorexa.min.js')?>"></script>
+</body>
+</html>

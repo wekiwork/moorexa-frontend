@@ -1,0 +1,89 @@
+.error-warning{padding: 20px; font-size: 20px; background: #f90; color: #fff;
+border-left: 10px solid #db2119; margin-top: 5px; margin-bottom: 5px; box-shadow: 0px 6px 5px #eee;}
+.errorPage{background: #eee; padding-top: 40px; padding-bottom: 50px;clear: both; display: block;
+height: 100vh; position: relative; top: 0; left: 0;}
+.errorPage h1{font-size: 7em !important; margin: 0px; color: #000;
+font-family: 'Lora-Bold'; margin: 0px; line-height: normal !important;}
+.errorPage h1:nth-child(2){margin-top: -77px;}
+.errorPage h1 b{font-size: 3em; color: #db2119; margin-bottom: -10px; display: block;}
+.errorPage p{font-size: 1.2em; padding: 10px; margin-top: 2px;
+font-family: 'Muli-Regular'; color: #000;}
+.errorPage p span{border:1px solid #eee;}
+.errorPage ul{display: block; list-style: none;}
+.errorPage ul li{display: inline-block; padding: 10px; height: 50px; 
+	background: rgba(255,255,255,0.8); margin-top: 4px; margin-bottom: 4px;
+box-shadow: 0px 4px 7px #eee; border: 1px solid #eee;}
+.errorPage ul li a{color: #000; font-size: 1.3em; padding: 10px;}
+.errorPage ul li a:hover{color: #f20;}
+
+#sos-bg{background: #eee; padding: 0; margin: 0; padding-top: 3em;}
+#sos-error{
+	color: #fff;
+}
+#sos-error span{display: block; border-bottom: 1px solid #fff;
+padding-bottom: 15px; text-align: center; 
+	background: #db2119;
+	padding: 2em;
+	font-size: 1.6em;}
+#sos-error img{display: block; margin: auto; }
+
+*[data-type="go-back-top"]{position: fixed; top: 20px; left: 10px; display: flex;
+z-index: 99;}
+*[data-type="go-back-top"] span:nth-child(1){width: 40px; height: 40px; border-radius: 50%;
+background-color: #db2119; display: block;
+background-image: url('../images/icons/arrow-left.png');
+background-repeat: no-repeat;
+background-size: 25px;
+background-position: 50%;
+transition: background-position 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+*[data-type="go-back-top"]:hover span:nth-child(1){background-position: 30%;
+box-shadow: 5px 5px 10px rgba(0,0,0,0.1); }
+*[data-type="go-back-top"]:hover{cursor: pointer;}
+*[data-type="go-back-text"]{display: flex; padding-left: 10px;}
+*[data-type="go-back-text"] b{font-weight: normal; margin: auto; font-size: 16px;
+	font-family: 'Muli-Regular';}
+*[data-type="go-back-btn"]{background-color: #db2119; padding: 15px; color: #fff;
+	text-decoration: none; font-family: 'Muli-Regular';
+background-image: url('../images/icons/home.png');
+background-repeat: no-repeat;
+background-size: 35px; background-position: center;
+display: block;
+width: 40px; height: 40px; border-radius: 50%;
+box-shadow: -10px 10px 10px rgba(0,0,0,0.1);
+position: fixed; bottom: 20px; right: 20px;
+transition: box-shadow 0.4s ease-in-out;
+z-index: 99;
+}
+*[data-type="go-back-btn"]:hover{box-shadow: -20px 15px 10px rgba(0,0,0,0.1);}
+.modal-sitemap{position: fixed; width: 100%; height: 100%; top: 0; left: 0;
+z-index: 10; background: rgba(0,0,0,0.1); display: none;
+box-shadow: 0px 0px 5px rgba(0,0,0,0.4);
+opacity: 0; transition: opacity 0.5s ease-in-out;}
+.modal-sitemap ul{padding:0px; margin: auto; background: #fff; min-width: 40%;
+display: flex; flex-direction: column; max-height: 80%; overflow: auto;}
+.modal-sitemap ul li{box-shadow: none; border: none; display: flex;
+background-image: url('../images/icons/folder-pack.png');
+background-size: 35px; background-position: 4%; background-repeat: no-repeat;
+padding-left: 60px; border-bottom: 1px solid #eee;
+background-color: #fcfcfc; position: relative; top: 0; left: 0;
+margin: 0;}
+.modal-sitemap ul li a{text-align: left; align-self: flex-start; margin: auto;
+	width: 100%; text-decoration: none; font-family: 'Muli-Regular';
+	font-size: 18px;
+}
+.modal-sitemap .arrow-right{position: absolute; right: 10px; top: 0px; height: 100%; width: 20%;
+	background-image: url('../images/icons/right-arrow.png');
+	background-size: 25px;
+	background-position: right;
+	background-repeat: no-repeat;
+	opacity: 0.3;
+	transition: opacity 0.6s ease-in-out;
+}
+.modal-sitemap ul li:hover{background-color: rgba(0,0,0,0.1);}
+.modal-sitemap ul li:hover .arrow-right{opacity: 1;}
+.modal-sitemap ul li:hover a{color: #db2119;}
+.moorexa-request-errors{display: block; padding-bottom: 15px; padding-top: 10px;}
+.moorexa-request-errors h3{font-weight: normal; font-family: 'HelveticaLight'; margin: 0;}
+.moorexa-request-errors ul{padding: 0; margin: 0; margin-bottom: 10px;}
+.moorexa-request-errors ul li{font-family: 'Poppins'; font-size: 14px;}

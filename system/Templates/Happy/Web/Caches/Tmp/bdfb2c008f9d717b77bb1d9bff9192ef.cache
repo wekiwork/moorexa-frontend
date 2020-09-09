@@ -1,0 +1,13 @@
+<?php
+use function Lightroom\Templates\Functions\{controller};
+use function Lightroom\Requests\Functions\{session, cookie, get};
+use function Lightroom\Common\Functions\csrf;
+?>
+<!-- ././app/App/Views/home.html -->
+
+<div class="new-moorexa-view">
+	<div class="new-moorexa-view-wrapper">
+		<img src="<?=assets_image("sys/smiling2.png")?>">
+		<h1 style="padding:20px; font-size:30px;">App/home->render('home.html') generated a new view for you. This view template lives in ././app/App/Views/home.html</h1>
+	</div>
+</div>
