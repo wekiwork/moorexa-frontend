@@ -249,8 +249,6 @@ class Engine extends ControllerLoader
            return is_dir($path) ? $path : $base . $path;
         };
 
-        (new Hyphe());
-
         // return array
         return [
             'setViewDirectory'      => $getPath('view'),
