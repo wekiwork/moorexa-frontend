@@ -74,3 +74,9 @@ define('CONTROLLER_PACKAGE',    'Packages');
 define('CONTROLLER_PARTIAL',    'Partials');
 define('CONTROLLER_STATIC',     'Static');
 define('CONTROLLER_PROVIDER',   'Providers');
+
+// default packager
+$MAIN_PACKAGER = Lightroom\Packager\Moorexa\MoorexaWebPackager::class;
+
+// default packager for the cli
+$CLI_PACKAGER = Lightroom\Packager\Moorexa\MoorexaCliPackager::class;
