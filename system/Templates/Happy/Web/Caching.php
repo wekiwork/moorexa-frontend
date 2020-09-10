@@ -295,6 +295,9 @@ class Caching
         // @var string $directory
         $directory = __DIR__ . '/Caches/';
 
+        // try create tmp folder
+        if (!is_dir($directory . 'Tmp/')) mkdir($directory . 'Tmp/');
+
         // save path
         $savePath = $directory . 'Tmp/' . md5($path) . '.cache';
 
