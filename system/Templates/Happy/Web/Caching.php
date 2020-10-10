@@ -59,7 +59,7 @@ class Caching
         else:
 
             // get path
-            $path = self::$cached[md5($path)]->path;
+            $path = __DIR__ . self::$cached[md5($path)]->path;
 
         endif;
 
@@ -298,8 +298,11 @@ class Caching
         // try create tmp folder
         if (!is_dir($directory . 'Tmp/')) mkdir($directory . 'Tmp/');
 
+        // cache file
+        $cacheFile = 'Tmp/' . md5($path) . '.cache';
+
         // save path
-        $savePath = $directory . 'Tmp/' . md5($path) . '.cache';
+        $savePath = $directory . $cacheFile;
 
         // @var string $content
         self::parseFromExternalEngine($savePath, $interpolatedContent);
@@ -311,7 +314,7 @@ class Caching
         file_put_contents($savePath, $interpolatedContent);
 
         // update path
-        $cacheFile = $savePath;
+        $cacheFile = '/Caches/' . $cacheFile;
 
         // if ($original == $content) :
 
@@ -326,9 +329,7 @@ class Caching
         // save now
         file_put_contents($directory . 'cached.json', json_encode(self::$cached, JSON_PRETTY_PRINT));
 
-        // endif;
-
         // return string
-        return $cacheFile;
+        return __DIR__ . $cacheFile;
     }
 }
