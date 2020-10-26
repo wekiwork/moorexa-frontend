@@ -234,6 +234,36 @@ Directives::register([
             endif;
         });
     },
+
+    /**
+     * @method shouldPrint
+     * @param string $variable
+     * @return string 
+     */
+    'shouldPrint' => function(string $variable) : string
+    {
+        // Remove quote
+        $variable = preg_replace('/[\'|"]/', '', $variable);
+
+        // @return string
+        return "<?php if(isset(\$$variable)) :
+
+                // get variable type
+                switch (gettype(\$$variable)) :
+
+                    case 'string':
+                    case 'number':
+                    case 'integer':
+                        echo \$$variable;
+                    break;
+
+                    default:
+                        var_dump(\$$variable);
+                endswitch;
+
+            endif;
+        ?>";
+    }
 ],
 
 
